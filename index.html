@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🎉 For Ramya!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Poppins',sans-serif;background:#1a0030}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s;transform:translateY(20px);overflow-y:auto}
+.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.scrollable{overflow-y:auto;max-height:85vh;width:100%;padding-bottom:20px}
+.bg-party{background:linear-gradient(135deg,#ff6b6b 0%,#feca57 25%,#48dbfb 50%,#ff9ff3 75%,#54a0ff 100%)}
+.bg-fun{background:linear-gradient(160deg,#f9ca24 0%,#f0932b 40%,#eb4d4b 100%)}
+.bg-cool{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 50%,#fd79a8 100%)}
+.bg-warm{background:linear-gradient(135deg,#fdcb6e 0%,#e17055 50%,#d63031 100%)}
+.bg-dark{background:linear-gradient(135deg,#2d3436 0%,#636e72 100%)}
+.bg-friends{background:linear-gradient(160deg,#f9ca24 0%,#6c5ce7 50%,#00cec9 100%)}
+.confetti-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.cb{position:absolute;width:10px;height:10px;opacity:0;animation:cbFall linear infinite}
+@keyframes cbFall{0%{opacity:1;transform:translateY(-10px) rotate(0)}100%{opacity:0;transform:translateY(110vh) rotate(720deg)}}
+.content{position:relative;z-index:1;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.big-title{font-family:'Pacifico',cursive;font-size:2rem;color:#fff;text-align:center;text-shadow:3px 3px 0 rgba(0,0,0,.2);line-height:1.2}
+.fun-title{font-family:'Fredoka One',cursive;font-size:1.8rem;color:#fff;text-align:center;text-shadow:2px 2px 0 rgba(0,0,0,.15)}
+.subtitle{font-family:'Dancing Script',cursive;font-size:1.3rem;color:rgba(255,255,255,.9);text-align:center}
+.body-txt{font-size:.9rem;color:rgba(255,255,255,.9);text-align:center;line-height:1.7}
+.hint{font-size:.72rem;color:rgba(255,255,255,.5);font-style:italic}
+.passcode-row{display:flex;gap:12px}
+.pbox{width:54px;height:54px;border:2.5px solid rgba(255,255,255,.4);border-radius:14px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:1.8rem;color:#fff;backdrop-filter:blur(10px);transition:all .3s}
+.pbox.filled{background:rgba(255,255,255,.25);border-color:#fff;box-shadow:0 0 16px rgba(255,255,255,.4)}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:220px}
+.key{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-family:'Fredoka One',cursive;font-size:1.3rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent}
+.key:hover{background:rgba(255,255,255,.3);transform:scale(1.05)}
+.key:active{transform:scale(.95);background:rgba(255,255,255,.4)}
+@keyframes keyWrong{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.polaroid{background:#fff;padding:10px 10px 36px;box-shadow:0 8px 28px rgba(0,0,0,.3);transform:rotate(-3deg);width:150px;text-align:center}
+.pol-img{width:130px;height:130px;overflow:hidden;background:linear-gradient(135deg,#feca57,#ff9ff3);display:flex;align-items:center;justify-content:center;font-size:3rem}
+.pol-img img{width:100%;height:100%;object-fit:cover}
+.pol-cap{font-family:'Dancing Script',cursive;font-size:.82rem;color:#d63031;margin-top:6px;line-height:1.3}
+.btn{padding:13px 32px;border-radius:50px;border:none;cursor:pointer;font-family:'Fredoka One',cursive;font-size:1.05rem;letter-spacing:.05em;transition:all .2s;user-select:none;-webkit-tap-highlight-color:transparent}
+.btn-white{background:#fff;color:#6c5ce7;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.btn-white:hover{transform:translateY(-2px)}
+.btn-yellow{background:linear-gradient(135deg,#feca57,#f9ca24);color:#2d3436;box-shadow:0 4px 18px rgba(254,202,87,.5)}
+.btn-pink{background:linear-gradient(135deg,#ff9ff3,#fd79a8);color:#fff;box-shadow:0 4px 18px rgba(253,121,168,.4)}
+.btn-green{background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;box-shadow:0 4px 18px rgba(0,184,148,.4);flex:1}
+.btn-gray{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.25);flex:1}
+.btn-row{display:flex;gap:12px;width:100%}
+.back-btn{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:50px;padding:7px 16px;font-size:.78rem;cursor:pointer;font-family:'Poppins',sans-serif;backdrop-filter:blur(10px);z-index:10;-webkit-tap-highlight-color:transparent}
+
+/* MUSIC BTN */
+#musicBtn{position:fixed;bottom:18px;right:18px;z-index:999;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);border-radius:50%;width:48px;height:48px;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:all .2s;-webkit-tap-highlight-color:transparent}
+#musicBtn:hover{background:rgba(255,255,255,.35);transform:scale(1.1)}
+
+/* HUB */
+.hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.hub-btn{border-radius:20px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:all .2s;backdrop-filter:blur(10px);color:#fff;padding:16px 8px;position:relative;-webkit-tap-highlight-color:transparent}
+.hub-btn span.ico{font-size:2rem}
+.hub-btn span.lbl{font-size:.56rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.75);text-align:center}
+.hub-btn:hover{background:rgba(255,255,255,.25);transform:translateY(-4px)}
+.hub-btn.done{border-color:#feca57;background:rgba(254,202,87,.15)}
+.hub-btn.done::after{content:'✓';position:absolute;top:5px;right:7px;font-size:.7rem;color:#feca57}
+.prog-row{display:flex;gap:7px}
+.pdot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s}
+.pdot.done{background:#feca57;box-shadow:0 0 8px rgba(254,202,87,.6)}
+.success-pop{animation:sPop .5s cubic-bezier(.175,.885,.32,1.275) both}
+@keyframes sPop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.bounce{animation:bonce 1.8s ease-in-out infinite}
+@keyframes bonce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.plead{font-size:5rem;animation:pleadR 1.5s ease-in-out infinite}
+@keyframes pleadR{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+
+/* REASONS */
+.reason-card{background:rgba(255,255,255,.12);border-radius:18px;padding:14px 16px;border-left:4px solid;text-align:left;backdrop-filter:blur(8px)}
+.reason-card p{font-size:.88rem;color:#fff;line-height:1.65}
+.reason-card .num{font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:4px}
+
+/* QUIZ */
+.quiz-card{background:rgba(255,255,255,.1);border-radius:20px;padding:20px;width:100%;backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,.2)}
+.quiz-q{font-family:'Fredoka One',cursive;font-size:1.05rem;color:#fff;text-align:center;margin-bottom:14px;line-height:1.4}
+.quiz-opts{display:flex;flex-direction:column;gap:9px}
+.qopt{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:11px 14px;color:#fff;font-size:.85rem;cursor:pointer;transition:all .2s;text-align:left;-webkit-tap-highlight-color:transparent}
+.qopt:hover{background:rgba(255,255,255,.25)}
+.qopt.correct{background:rgba(0,184,148,.35);border-color:#00b894}
+.qopt.wrong{background:rgba(214,48,49,.3);border-color:#d63031;animation:wrongShake .4s ease}
+@keyframes wrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.quiz-result{font-family:'Fredoka One',cursive;font-size:1.5rem;color:#feca57;text-align:center}
+.score-bar{width:100%;height:12px;background:rgba(255,255,255,.15);border-radius:6px;overflow:hidden}
+.score-fill{height:100%;background:linear-gradient(90deg,#00b894,#feca57);border-radius:6px;transition:width .8s ease}
+
+/* FLIP GALLERY */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;perspective:1000px}
+.fcard{position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,0,.2,1);cursor:pointer;transform:rotate(var(--r,0deg))}
+.fcard:nth-child(2){--r:2deg}.fcard:nth-child(3){--r:-1.5deg}.fcard:nth-child(4){--r:2.5deg}
+.fcard:nth-child(5){--r:-2deg}.fcard:nth-child(6){--r:1.5deg}.fcard:nth-child(7){--r:-2.5deg}.fcard:nth-child(8){--r:2deg}
+.fcard.flipped{transform:rotate(var(--r,0deg)) rotateY(180deg)}
+.cf,.cb2{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px}
+.cf{background:linear-gradient(160deg,#f5e6c8,#d4b878);padding:9px 9px 28px;box-shadow:0 6px 18px rgba(0,0,0,.35);position:relative;overflow:hidden;border:1px solid #c9a84c}
+.cf::before{content:'';position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(#f5e6c8,transparent);clip-path:polygon(0 0,3% 100%,6% 30%,9% 100%,12% 20%,15% 100%,18% 40%,21% 100%,24% 10%,27% 100%,30% 50%,33% 100%,36% 20%,39% 100%,42% 30%,45% 100%,48% 10%,51% 100%,54% 40%,57% 100%,60% 20%,63% 100%,66% 60%,69% 100%,72% 30%,75% 100%,78% 10%,81% 100%,84% 40%,87% 100%,90% 20%,93% 100%,96% 50%,100% 0);z-index:2}
+.cf-num{font-family:'Dancing Script',cursive;font-size:.72rem;color:#8b6a2a;text-align:center;margin-bottom:3px;opacity:.7}
+.cf-img{width:100%;aspect-ratio:1;overflow:hidden;border:2px solid #c9a84c;background:#dcc48a;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cf-img img{width:100%;height:100%;object-fit:cover}
+.cf-cap{font-size:1.1rem;text-align:center;margin-top:5px}
+.cf-seal{position:absolute;bottom:5px;right:7px;font-size:1rem;opacity:.5}
+.cf-hint{position:absolute;bottom:5px;left:7px;font-size:.48rem;color:#8b6a2a;opacity:.6;font-style:italic}
+.cb2{position:absolute;inset:0;background:#fff;transform:rotateY(180deg);padding:6px 6px 24px;box-shadow:0 6px 18px rgba(0,0,0,.35);display:flex;flex-direction:column;border:1px solid #eee}
+.cb2-img{width:100%;flex:1;overflow:hidden;background:#f0f0f0}
+.cb2-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cb2-cap{font-size:1rem;margin-top:4px;text-align:center}
+
+/* GLITTER LETTER */
+.letter{background:#fffdf5;border-radius:4px;padding:26px 22px;width:100%;box-shadow:0 8px 28px rgba(0,0,0,.25);position:relative;overflow:hidden}
+.letter::before{content:'';position:absolute;left:38px;top:0;bottom:0;width:1px;background:rgba(255,100,100,.18)}
+.letter-lines{background:repeating-linear-gradient(transparent,transparent 27px,rgba(100,100,255,.07) 27px,rgba(100,100,255,.07) 28px)}
+.letter-txt{font-family:'Dancing Script',cursive;font-size:1.02rem;color:#333;line-height:1.9;position:relative;z-index:1}
+.letter-sign{font-family:'Dancing Script',cursive;font-size:1.15rem;color:#6c5ce7;text-align:right;margin-top:14px}
+.glitter-word{background:linear-gradient(90deg,#ff6b6b,#feca57,#48dbfb,#ff9ff3,#a29bfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glitterShift 2s linear infinite;background-size:200%}
+@keyframes glitterShift{0%{background-position:0%}100%{background-position:200%}}
+.sparkle{display:inline-block;animation:sparkSpin 1.5s ease-in-out infinite}
+@keyframes sparkSpin{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(180deg)}}
+
+/* VIDEO */
+.vid-frame{width:100%;aspect-ratio:9/16;max-height:48vh;background:rgba(0,0,0,.4);border-radius:16px;border:2px solid rgba(255,255,255,.1);overflow:hidden}
+
+/* CONFETTI PIECES */
+.cp{position:fixed;width:9px;height:9px;top:-10px;opacity:0;animation:cpFall linear forwards;z-index:100;border-radius:2px}
+@keyframes cpFall{0%{opacity:1;transform:translateY(0) rotateZ(0)}100%{opacity:0;transform:translateY(110vh) rotateZ(720deg)}}
+</style>
+</head>
+<body>
+
+<div class="confetti-bg" id="cbg"></div>
+
+<!-- MUSIC BTN -->
+<button id="musicBtn" onclick="toggleMusic()" title="Play/Pause BGM">🎵</button>
+<audio id="bgm" loop src="https://archive.org/download/happy-birthday_20260704/Happy-Birthday.mp3"></audio>
+
+<!-- ══ S1: PASSCODE 0 ══ -->
+<div class="screen bg-party active" id="s1">
+  <div class="content">
+    <div style="display:flex;gap:18px;align-items:center;width:100%">
+      <div class="polaroid">
+        <div class="pol-img"><img src="https://i.postimg.cc/Jhvm7j0V/IMG-20260704-224211-577.jpg" alt="Ramya"></div>
+        <div class="pol-cap">Happy birthday 🎈 Ramyaaaaaaaa</div>
+      </div>
+      <div style="flex:1">
+        <div class="fun-title" style="font-size:1.3rem">Secret passcode 🔐</div>
+        <div class="hint" style="margin-top:5px">hint: ur bday 🎂</div>
+      </div>
+    </div>
+    <div class="passcode-row">
+      <div class="pbox"></div><div class="pbox"></div><div class="pbox"></div><div class="pbox"></div>
+    </div>
+    <div class="keypad">
+      <div class="key" onclick="pk(1,'0',this,true)">0</div>
+      <div class="key" onclick="pk(1,'x')">1</div>
+      <div class="key" onclick="pk(1,'x')">2</div>
+      <div class="key" onclick="pk(1,'x')">3</div>
+      <div class="key" onclick="pk(1,'x')">4</div>
+      <div class="key" onclick="pk(1,'x')">5</div>
+      <div class="key" onclick="pk(1,'x')">6</div>
+      <div class="key" onclick="pk(1,'x')">7</div>
+      <div class="key" onclick="pk(1,'x')">8</div>
+      <div class="key" onclick="pk(1,'x')">9</div>
+      <div class="key" onclick="pk(1,'x')">*</div>
+      <div class="key" onclick="pk(1,'x')">#</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S2 ══ -->
+<div class="screen bg-party" id="s2">
+  <div class="content">
+    <div style="display:flex;gap:18px;align-items:center;width:100%">
+      <div class="polaroid"><div class="pol-img"><img src="https://i.postimg.cc/Jhvm7j0V/IMG-20260704-224211-577.jpg" alt="Ramya"></div><div class="pol-cap">Happy birthday 🎈 Ramyaaaaaaaa</div></div>
+      <div style="flex:1"><div class="fun-title" style="font-size:1.3rem">Secret passcode 🔐</div><div class="hint" style="margin-top:5px">hint: ur bday 🎂</div></div>
+    </div>
+    <div class="passcode-row"><div class="pbox filled">●</div><div class="pbox"></div><div class="pbox"></div><div class="pbox"></div></div>
+    <div class="keypad">
+      <div class="key" onclick="pk(2,'x')">0</div><div class="key" onclick="pk(2,'x')">1</div><div class="key" onclick="pk(2,'x')">2</div>
+      <div class="key" onclick="pk(2,'x')">3</div><div class="key" onclick="pk(2,'x')">4</div><div class="key" onclick="pk(2,'5',this,true)">5</div>
+      <div class="key" onclick="pk(2,'x')">6</div><div class="key" onclick="pk(2,'x')">7</div><div class="key" onclick="pk(2,'x')">8</div>
+      <div class="key" onclick="pk(2,'x')">9</div><div class="key" onclick="pk(2,'x')">*</div><div class="key" onclick="pk(2,'x')">#</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S3 ══ -->
+<div class="screen bg-party" id="s3">
+  <div class="content">
+    <div style="display:flex;gap:18px;align-items:center;width:100%">
+      <div class="polaroid"><div class="pol-img"><img src="https://i.postimg.cc/Jhvm7j0V/IMG-20260704-224211-577.jpg" alt="Ramya"></div><div class="pol-cap">Happy birthday 🎈 Ramyaaaaaaaa</div></div>
+      <div style="flex:1"><div class="fun-title" style="font-size:1.3rem">Secret passcode 🔐</div><div class="hint" style="margin-top:5px">hint: ur bday 🎂</div></div>
+    </div>
+    <div class="passcode-row"><div class="pbox filled">●</div><div class="pbox filled">●</div><div class="pbox"></div><div class="pbox"></div></div>
+    <div class="keypad">
+      <div class="key" onclick="pk(3,'0',this,true)">0</div><div class="key" onclick="pk(3,'x')">1</div><div class="key" onclick="pk(3,'x')">2</div>
+      <div class="key" onclick="pk(3,'x')">3</div><div class="key" onclick="pk(3,'x')">4</div><div class="key" onclick="pk(3,'x')">5</div>
+      <div class="key" onclick="pk(3,'x')">6</div><div class="key" onclick="pk(3,'x')">7</div><div class="key" onclick="pk(3,'x')">8</div>
+      <div class="key" onclick="pk(3,'x')">9</div><div class="key" onclick="pk(3,'x')">*</div><div class="key" onclick="pk(3,'x')">#</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S4 ══ -->
+<div class="screen bg-party" id="s4">
+  <div class="content">
+    <div style="display:flex;gap:18px;align-items:center;width:100%">
+      <div class="polaroid"><div class="pol-img"><img src="https://i.postimg.cc/Jhvm7j0V/IMG-20260704-224211-577.jpg" alt="Ramya"></div><div class="pol-cap">Happy birthday 🎈 Ramyaaaaaaaa</div></div>
+      <div style="flex:1"><div class="fun-title" style="font-size:1.3rem">Secret passcode 🔐</div><div class="hint" style="margin-top:5px">hint: ur bday 🎂</div></div>
+    </div>
+    <div class="passcode-row"><div class="pbox filled">●</div><div class="pbox filled">●</div><div class="pbox filled">●</div><div class="pbox"></div></div>
+    <div class="keypad">
+      <div class="key" onclick="pk(4,'x')">0</div><div class="key" onclick="pk(4,'x')">1</div><div class="key" onclick="pk(4,'x')">2</div>
+      <div class="key" onclick="pk(4,'x')">3</div><div class="key" onclick="pk(4,'x')">4</div><div class="key" onclick="pk(4,'x')">5</div>
+      <div class="key" onclick="pk(4,'x')">6</div><div class="key" onclick="pk(4,'7',this,true)">7</div><div class="key" onclick="pk(4,'x')">8</div>
+      <div class="key" onclick="pk(4,'x')">9</div><div class="key" onclick="pk(4,'x')">*</div><div class="key" onclick="pk(4,'x')">#</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S5: ACCESS GRANTED ══ -->
+<div class="screen bg-fun" id="s5">
+  <div class="content" style="gap:14px">
+    <div class="success-pop" style="font-size:5rem">🎊</div>
+    <div class="big-title" style="animation:sPop .5s .2s both">CORRECT DA! 🎉</div>
+    <div class="subtitle" style="animation:sPop .5s .4s both">Cracked it just like that 😂heyyy girl unnaku 20 aagiruchu ✨</div>
+    <div style="font-size:2rem;animation:sPop .5s .6s both">🌈🎈🥳🎉✨</div>
+    <div class="body-txt" style="animation:sPop .5s .8s both">Unaku mattum dhan ithu — specially made<br>with full heart 🫶 Let's go inside!</div>
+    <button class="btn btn-white" onclick="goTo('s6')" style="animation:sPop .5s 1s both">LET'S GOOO →</button>
+  </div>
+</div>
+
+<!-- ══ S6: OPEN GIFT? ══ -->
+<div class="screen bg-cool" id="s6">
+  <div class="content">
+    <div class="big-title">Ramyaaaaa!! 🌈</div>
+    <div class="subtitle">I made something for you da!</div>
+    <div class="bounce" style="font-size:6rem">🎁</div>
+    <div class="body-txt">Idhula enna irukku nu any guess?<br>Open pannuviya? 👀</div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="goTo('s8')">OBVIOUSLY YES 🎉</button>
+      <button class="btn btn-gray" onclick="goTo('s7')">Illai...</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S7: TRAP ══ -->
+<div class="screen bg-warm" id="s7">
+  <div class="content">
+    <div class="plead">🥺</div>
+    <div class="fun-title">Ramyaaaa come on!!</div>
+    <div class="subtitle">Ithai pannna evlo neram achu theriyuma 😭</div>
+    <div class="body-txt">Un best friend with full love konjam kolaru thamana pannaa ithai...<br>Oru chance kududa please 😤💕</div>
+    <button class="btn btn-yellow" onclick="goTo('s6')">OKAY FINE 😂💕</button>
+  </div>
+</div>
+
+<!-- ══ S8: CAKE ══ -->
+<div class="screen bg-fun" id="s8">
+  <div class="content">
+    <div class="fun-title">Wish panni paaruuuu ✨</div>
+    <div class="subtitle">Kanna moodu — no cheating 😤</div>
+    <div style="font-size:7rem;animation:bonce 2s ease-in-out infinite">🎂</div>
+    <div class="body-txt">Un manasula enna irukko atha ninechu...<br>Nee deserve pannuva everything, bestie 💫</div>
+    <button class="btn btn-white" onclick="blow()">💨 BLOW!!</button>
+  </div>
+</div>
+
+<!-- ══ S9: CAKE BLOWN ══ -->
+<div class="screen bg-fun" id="s9">
+  <div class="content">
+    <div class="fun-title">HAPPY BIRTHDAY RAMYA!! 🎂🎉</div>
+    <div style="font-size:6rem">🍰</div>
+    <div class="subtitle">July 5 — the best day 🌟</div>
+    <div style="background:rgba(255,255,255,.15);border-radius:16px;padding:16px;backdrop-filter:blur(10px);width:100%">
+      <div class="body-txt">One year eriduchu teen age mudinchuthu nu mattum illa 😂 (aunty agita anyways😅)but jokes apart— un life la innoru golden chapter start aagudhu!!! unakku eppayum best dhan varum! 🥹</div>
+    </div>
+    <button class="btn btn-white" onclick="goTo('s10')">NEXT →</button>
+  </div>
+</div>
+
+<!-- ══ S10: HUB ══ -->
+<div class="screen bg-friends" id="s10">
+  <div class="content">
+    <div class="big-title" style="font-size:1.6rem">Un Surprise Menu 🎀</div>
+    <div class="prog-row">
+      <div class="pdot" id="d1"></div><div class="pdot" id="d2"></div><div class="pdot" id="d3"></div><div class="pdot" id="d4"></div><div class="pdot" id="d5"></div>
+    </div>
+    <div class="hub-grid">
+      <div class="hub-btn" id="h1" onclick="hub('s11','d1','h1')"><span class="ico">📸</span><span class="lbl">Photos</span></div>
+      <div class="hub-btn" id="h2" onclick="hub('s12','d2','h2')"><span class="ico">🤣</span><span class="lbl">Quiz</span></div>
+      <div class="hub-btn" id="h3" onclick="hub('s13','d3','h3')"><span class="ico">🌟</span><span class="lbl">Why You're You</span></div>
+      <div class="hub-btn" id="h4" onclick="hub('s14','d4','h4')"><span class="ico">💌</span><span class="lbl">Letter</span></div>
+      <div class="hub-btn" id="h5" onclick="hub('s15','d5','h5')"><span class="ico">🎬</span><span class="lbl">Videos</span></div>
+    </div>
+    <div class="hint">5 um open pannitu final surprise unlock pannuuu!</div>
+    <button class="btn btn-yellow" id="finBtn" onclick="goTo('s16')" style="display:none">🌈 FINAL SURPRISE!</button>
+  </div>
+</div>
+
+<!-- ══ S11: GALLERY ══ -->
+<div class="screen bg-dark" id="s11">
+  <button class="back-btn" onclick="goTo('s10')">← Back</button>
+  <div class="content scrollable" style="padding-top:56px">
+    <div class="fun-title">Golden Moments 📸</div>
+    <div class="subtitle" style="font-size:.95rem">Tap each scroll to reveal ✨</div>
+    <div class="gallery">
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №1</div><div class="cf-img"><img src="https://i.postimg.cc/nLBZzCDs/IMG-20260704-224222-018.jpg" alt=""></div><div class="cf-cap">🌟✨</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/nLBZzCDs/IMG-20260704-224222-018.jpg" alt=""></div><div class="cb2-cap">🌟✨</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №2</div><div class="cf-img"><img src="https://i.postimg.cc/nLBZzCDs/IMG-20260704-224222-018.jpg" alt=""></div><div class="cf-cap">🌸💕</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/nLBZzCDs/IMG-20260704-224222-018.jpg" alt=""></div><div class="cb2-cap">🌸💕</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №3</div><div class="cf-img"><img src="https://i.postimg.cc/kMF4shGk/IMG-20260704-224219-526.jpg" alt=""></div><div class="cf-cap">😄🎉</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/kMF4shGk/IMG-20260704-224219-526.jpg" alt=""></div><div class="cb2-cap">😄🎉</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №4</div><div class="cf-img" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7);align-items:center;justify-content:center">💫</div><div class="cf-cap">💫🥰</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7);display:flex;align-items:center;justify-content:center;font-size:3rem">💫</div><div class="cb2-cap">💫🥰</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №5</div><div class="cf-img"><img src="https://i.postimg.cc/rwTDMXbm/Screenshot-2026-07-04-23-11-37-04-1c337646f29875672b5a61192b9010f9.jpg" alt=""></div><div class="cf-cap">🤣💛</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/rwTDMXbm/Screenshot-2026-07-04-23-11-37-04-1c337646f29875672b5a61192b9010f9.jpg" alt=""></div><div class="cb2-cap">🤣💛</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №6</div><div class="cf-img"><img src="https://i.postimg.cc/hGjPtS0s/Screenshot-2026-07-04-23-05-40-12-1c337646f29875672b5a61192b9010f9.jpg" alt=""></div><div class="cf-cap">🎭😂</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/hGjPtS0s/Screenshot-2026-07-04-23-05-40-12-1c337646f29875672b5a61192b9010f9.jpg" alt=""></div><div class="cb2-cap">🎭😂</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №7</div><div class="cf-img"><img src="https://i.postimg.cc/9F6nf1tR/20250903-140846.jpg" alt=""></div><div class="cf-cap">🫶❤️</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/9F6nf1tR/20250903-140846.jpg" alt=""></div><div class="cb2-cap">🫶❤️</div></div>
+      </div>
+      <div class="fcard" onclick="flipC(this)">
+        <div class="cf"><div class="cf-num">Memory №8</div><div class="cf-img"><img src="https://i.postimg.cc/htR2nvc8/IMG-20250903-WA0025.jpg" alt=""></div><div class="cf-cap">🌙⭐</div><div class="cf-seal">🔒</div><div class="cf-hint">tap to open</div></div>
+        <div class="cb2"><div class="cb2-img"><img src="https://i.postimg.cc/htR2nvc8/IMG-20250903-WA0025.jpg" alt=""></div><div class="cb2-cap">🌙⭐</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S12: QUIZ ══ -->
+<div class="screen bg-cool" id="s12">
+  <button class="back-btn" onclick="goTo('s10')">← Back</button>
+  <div class="content scrollable" style="padding-top:56px">
+    <div class="fun-title">Friendship Quiz! 🤣</div>
+    <div class="subtitle" style="font-size:.95rem">Ramyaaaa, let's check how much u know about our friendship nu? 👀</div>
+    <div id="quizArea"></div>
+    <div id="quizScore" style="display:none;width:100%">
+      <div class="quiz-result" id="scoreText"></div>
+      <div style="margin-top:10px;width:100%"><div class="score-bar"><div class="score-fill" id="scoreFill" style="width:0%"></div></div></div>
+      <div class="body-txt" id="scoreMsg" style="margin-top:10px"></div>
+      <button class="btn btn-yellow" onclick="restartQuiz()" style="margin-top:10px">Try Again 🔁</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S13: WHY YOU'RE YOU ══ -->
+<div class="screen bg-warm" id="s13">
+  <button class="back-btn" onclick="goTo('s10')">← Back</button>
+  <div class="content scrollable" style="padding-top:56px">
+    <div class="fun-title" style="font-size:1.5rem">Why You're Irreplaceable 🌟</div>
+    <div class="subtitle" style="font-size:.95rem">Let me share how important are you in my life!💛</div>
+    <div style="display:flex;flex-direction:column;gap:12px;width:100%">
+      <div class="reason-card" style="border-color:#feca57">
+        <div class="num">😌 Un presence-e oru comfort</div>
+        <p>yaarum illatha apo , eppadi share pannanumnu theriyatha apo — nee irukka as a friend athuve enough. That feeling is rare Ramya.</p>
+      </div>
+      <div class="reason-card" style="border-color:#ff9ff3">
+        <div class="num">🤝 Words thevayillai — we just know</div>
+        <p>Oru look paartha puriyudhu. Oru silence-le full conversation nadakkudhu. Ithai explain pannave mudiyathu — itha anubavichavangalukku mattum theriyum.</p>
+      </div>
+      <div class="reason-card" style="border-color:#48dbfb">
+        <div class="num">🎓 Day 1 classmate → life time bestie</div>
+        <p>Mokka College la introduce anom. But friendship this strong aachu — fate dhan ithai decide pannuchu, we just showed up 😄</p>
+      </div>
+      <div class="reason-card" style="border-color:#00b894">
+        <div class="num">💪 Nee enoda female partha version</div>
+        <p>Un attitude, un care, un way of handling things — sometimes naane shock aavan  whether nee paiyana ponnanu "Avan/Ava!" nu 😂 Exactly nee itha padikumbothu sirikurath paakuran, but better.</p>
+      </div>
+      <div class="reason-card" style="border-color:#a29bfe">
+        <div class="num">🌈 Every boring moment — fun aagudhu</div>
+        <p>Worst class, worst day — nee iruntha enough. Nothing feels heavy when you're around. That's a superpower not everyone has.</p>
+      </div>
+      <div class="reason-card" style="border-color:#f9ca24">
+        <div class="num">🥹 Real ones don't need proof</div>
+        <p>Nee eppavum enkooda irruka without ego Athellam rare . you Just show up — always. Athunaale dhan nee en best friend. Simple as that. 🫶</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S14: LETTER ══ -->
+<div class="screen bg-dark" id="s14">
+  <button class="back-btn" onclick="goTo('s10')">← Back</button>
+  <div class="content scrollable" style="padding-top:56px">
+    <div class="fun-title">A Letter For You 💌 <span class="sparkle">✨</span></div>
+    <div class="letter letter-lines">
+      <div class="letter-txt">
+        <span class="sparkle">🌟</span> Dear <span class="glitter-word">Ramya</span> 🌈,<br><br>
+        Namma friendship-ku oru grand beginning lam illai. Mokkai college-la meet pannom, pesina, nambina — adhuve enough aayiduchu. <span class="sparkle">✨</span><br><br>
+        En life la nee <span class="glitter-word">special</span> da — because nee sila time nan ethumey sollama purinjukuva. Oru look, oru silence — full conversation nadakkum sometimes. Athai words la solle mudiyathu 🤍<br><br>
+        <span class="sparkle">💫</span> Sometimes naane feel pannuvan am I this deserving to have you nu— Un way of thinking, un care, un simply-just-being-there energy — unnakey theriyaama nee special nu prove pannuva. 😄<br><br>
+        Worst days feel light , boring classes becomes bearable— nee iruntha. Adhuve gift Ramya. <span class="glitter-word">Unakku puriyutho</span> illaiyo — you make everything better just by being you. 🌈<br><br>
+        <span class="sparkle">🎂</span> Ithu un birthday — so today is the day the world gets reminded that you exist, and that's enough reason to celebrate! 🎉<br><br>
+        Keep smiling 😊, keep being exactly this weird and wonderful, and know that <span class="glitter-word">nee always en best friend</span> — no matter which city, which chapter, which year. 💛<br><br>
+        Happy Birthday da, <span class="glitter-word">Ramyaaaaa</span>! <span class="sparkle">🎊</span>
+      </div>
+      <div class="letter-sign">— Naveen 🤍 <span class="sparkle">✨</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S15: VIDEOS ══ -->
+<div class="screen bg-dark" id="s15">
+  <button class="back-btn" onclick="goTo('s10')">← Back</button>
+  <div class="content scrollable" style="padding-top:56px">
+    <div class="fun-title">Special Performances 🎬</div>
+    <div class="subtitle" style="font-size:.95rem">Unakku mattum — watch both! 💕</div>
+    <div style="width:100%">
+      <div class="body-txt" style="margin-bottom:8px">🎬 Performance 1</div>
+      <div class="vid-frame">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M5fxNL_v7T0" title="Special video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none"></iframe>
+      </div>
+    </div>
+    <div style="width:100%;margin-top:8px">
+      <div class="body-txt" style="margin-bottom:8px">🎬 Performance 2</div>
+      <div class="vid-frame">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M5fxNL_v7T0?start=1" title="Special video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none"></iframe>
+      </div>
+    </div>
+    <div style="font-size:1.8rem">🎊🌈🎂⭐💕</div>
+  </div>
+</div>
+
+<!-- ══ S16: FINALE ══ -->
+<div class="screen bg-party" id="s16">
+  <div class="content">
+    <div style="font-size:5rem" class="success-pop">🌈</div>
+    <div class="big-title" style="animation:sPop .5s .2s both">HAPPY BIRTHDAY<br>RAMYAAAAA!! 🎉</div>
+    <div class="subtitle" style="animation:sPop .5s .4s both">5 um open pannite — nee the best 🥹</div>
+    <div style="font-size:2.2rem;animation:sPop .5s .6s both">🎈🌈🎂🌟🎭🫶✨🎊</div>
+    <div class="body-txt" style="animation:sPop .5s .8s both;background:rgba(255,255,255,.15);border-radius:16px;padding:14px;backdrop-filter:blur(10px)">
+      En HG, en irreplaceable one 🫶<br>Indha friendship-ku thanks da Ramya — for just being you, always. Here's to more chaos, more memories, more everything! 🌈
+    </div>
+    <button class="btn btn-white" onclick="goTo('s6')" style="animation:sPop .5s 1s both">Replay 🔁</button>
+  </div>
+</div>
+
+<script>
+// CONFETTI BG
+const cbg=document.getElementById('cbg');
+const colors=['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#54a0ff','#00b894','#a29bfe','#f9ca24'];
+for(let i=0;i<20;i++){const el=document.createElement('div');el.className='cb';el.style.cssText=`left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${10+Math.random()*15}s;animation-delay:${Math.random()*10}s;border-radius:${Math.random()>.5?'50%':'2px'};width:${8+Math.random()*8}px;height:${8+Math.random()*8}px`;cbg.appendChild(el)}
+
+// MUSIC
+const bgm=document.getElementById('bgm');
+let playing=false;
+function toggleMusic(){
+  if(playing){bgm.pause();document.getElementById('musicBtn').textContent='🎵';playing=false}
+  else{bgm.play().catch(()=>{});document.getElementById('musicBtn').textContent='🔇';playing=true}
+}
+
+// NAV
+function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const t=document.getElementById(id);t.classList.add('active');t.scrollTop=0}
+
+// PASSCODE 0507
+const pcMap={1:{next:'s2'},2:{next:'s3'},3:{next:'s4'},4:{next:'s5'}};
+function pk(step,val,el,correct){
+  if(correct){
+    if(el){el.style.background='rgba(255,255,255,.4)';setTimeout(()=>el.style.background='',300)}
+    setTimeout(()=>{goTo(pcMap[step].next);if(step===4){confetti();if(!playing){bgm.play().catch(()=>{});document.getElementById('musicBtn').textContent='🔇';playing=true}}},200)
+  } else {
+    document.querySelectorAll(`#s${step} .pbox`).forEach(b=>{b.style.animation='keyWrong .35s ease';setTimeout(()=>b.style.animation='',350)});
+    setTimeout(()=>goTo('s1'),400)
+  }
+}
+
+// BLOW
+function blow(){confetti();setTimeout(()=>goTo('s9'),400)}
+
+// CONFETTI
+function confetti(){for(let i=0;i<70;i++){const el=document.createElement('div');el.className='cp';el.style.cssText=`left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.5}s;border-radius:${Math.random()>.5?'50%':'3px'};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px`;document.body.appendChild(el);setTimeout(()=>el.remove(),3000)}}
+
+// HUB
+const hubDone={};
+function hub(screenId,dotId,hubId){hubDone[hubId]=true;document.getElementById(dotId).classList.add('done');document.getElementById(hubId).classList.add('done');if(Object.keys(hubDone).length>=5){document.getElementById('finBtn').style.display='block';confetti()}goTo(screenId)}
+
+// FLIP
+function flipC(card){card.classList.toggle('flipped');const seal=card.querySelector('.cf-seal');if(seal)seal.textContent=card.classList.contains('flipped')?'🔓':'🔒'}
+
+// QUIZ
+const questions=[
+  {q:"How many days have we been chatting? 💬",opts:["365 days","400 days","547 days","430 days"],ans:2},
+  {q:"What's the first thing you asked me to teach? 📚",opts:["Physiology","Anatomy","Psychology","OT"],ans:2},
+  {q:"What was our first day traveling together? 🚌",opts:["December 22","January 11","April 10","August 8"],ans:1},
+  {q:"How special are you to me? 🥹",opts:["∞ ♾️","Option A","Option A and B","All of the above 😂"],ans:3},
+];
+let curQ=0,score=0;
+function buildQuiz(){curQ=0;score=0;document.getElementById('quizScore').style.display='none';renderQ()}
+function renderQ(){
+  const qa=document.getElementById('quizArea');
+  if(curQ>=questions.length){showScore();return}
+  const q=questions[curQ];
+  qa.innerHTML=`<div class="quiz-card"><div style="text-align:right;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:6px">${curQ+1}/${questions.length}</div><div class="quiz-q">${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="qopt" onclick="ansQ(${i},this)">${o}</button>`).join('')}</div></div>`;
+}
+function ansQ(idx,el){
+  const q=questions[curQ];
+  document.querySelectorAll('.qopt').forEach(b=>b.onclick=null);
+  if(idx===q.ans){el.classList.add('correct');score++}
+  else{el.classList.add('wrong');document.querySelectorAll('.qopt')[q.ans].classList.add('correct')}
+  setTimeout(()=>{curQ++;renderQ()},900)
+}
+function showScore(){
+  document.getElementById('quizArea').innerHTML='';
+  const pct=Math.round(score/questions.length*100);
+  document.getElementById('quizScore').style.display='block';
+  document.getElementById('scoreText').textContent=`${score}/${questions.length} 🎉`;
+  setTimeout(()=>document.getElementById('scoreFill').style.width=pct+'%',100);
+  const msgs=["Dei! Unnaku ethum theriyalayaa? Maranthutiyaa 😂","Not bad not bad 👀 konjam theriyudhu!","You know me pretty well da 🥹","Almost perfect 🫶","WE ARE LITERALLY THE SAME PERSON 🌈😂"];
+  document.getElementById('scoreMsg').textContent=msgs[Math.min(score,4)];
+}
+function restartQuiz(){buildQuiz()}
+buildQuiz();
+</script>
+</body>
+</html>
